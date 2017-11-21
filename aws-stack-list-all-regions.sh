@@ -6,4 +6,4 @@ IFS="|"
 while read stack_region region_name 
 do
 	aws cloudformation describe-stacks --region "${stack_region}" "${stack_name:+--stack-name}" ${stack_name} --query "Stacks[*].[StackName,StackStatus,CreationTime,StackStatusReason,DisableRollback]" --output table | sed "s?^?${stack_region} | ?" 
-done < aws-regions.lst
+done < `dirname $0`/aws-regions.lst
