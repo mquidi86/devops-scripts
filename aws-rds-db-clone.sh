@@ -15,7 +15,7 @@ do
 	test "${db_public_access}" == "True" && db_public_access="--publicly-accessible" || db_public_access="--no-publicly-accessible"
 	test ${db_multiaz} == "True" && db_multiaz="--multi-az" || db_multiaz="--no-multi-az"
 
-	echo aws rds restore-db-instance-from-db-snapshot --region "${aws_region}" --db-instance-identifier "${db_target}" --db-snapshot-identifier "${db_snapshot}" \
+	aws rds restore-db-instance-from-db-snapshot --region "${aws_region}" --db-instance-identifier "${db_target}" --db-snapshot-identifier "${db_snapshot}" \
 	--db-subnet-group-name "${db_subnetgroup}" --availability-zone "${db_az}" --option-group-name "${db_option}" "${db_public_access}" "${db_multiaz}"
 
 	echo Modify the following after the DB is created
